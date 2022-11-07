@@ -1,21 +1,22 @@
+import os
+
 import pandas as pd
 
 import plotly.express as px
 
+print(os.getcwd())
 
-nick = pd.read_csv('C:\\Users\\Pinball\\Documents\\Nick.csv')
-jarod = pd.read_csv('C:\\Users\\Pinball\\Documents\\Jarod.csv')
+nick = pd.read_csv('../data/Nick.csv')
+jarod = pd.read_csv('../data/Jarod.csv')
 
 df = pd.merge(nick, jarod, on=['Beer', 'Brewery'])
-
-#nick = nick.groupby('YourRating').size().reset_index(name='counts')
-#print(nick)
 
 with pd.option_context("display.max_columns", None):
     fig = px.histogram(jarod, x="YourRating", 
                        marginal="violin", # or violin, rug
                        hover_data=jarod.columns,
-                       nbins=10)
+                       nbins=20,
+                       xaxis=5)
     fig.show()
 
 
